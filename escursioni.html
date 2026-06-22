@@ -156,6 +156,9 @@ nav{
 .event-desc{
   font-size:.78rem;color:var(--earth);line-height:1.5;
 }
+.event-photos{display:flex;gap:.5rem;margin:.5rem 0}
+.event-photo{width:84px;height:84px;border:1px solid var(--tan);overflow:hidden;flex-shrink:0}
+.event-photo img{width:100%;height:100%;object-fit:cover}
 .event-tags{display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap}
 .event-tag{
   font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
@@ -199,6 +202,7 @@ nav{
     <li><a href="index.html#intro">Landscape</a></li>
     <li><a href="index.html#about">Journal</a></li>
     <li><a href="index.html#about">About</a></li>
+    <li><a href="esperienze.html">Esperienze</a></li>
     <li><a href="escursioni.html" class="active">Escursioni</a></li>
     <li><a href="index.html#footer">Contact</a></li>
   </ul>
@@ -210,6 +214,7 @@ nav{
   <button class="mob-close" id="mob-close">✕</button>
   <a href="index.html#intro" onclick="closeMob()">Explore</a>
   <a href="index.html#about" onclick="closeMob()">Journal</a>
+  <a href="esperienze.html" onclick="closeMob()">Esperienze</a>
   <a href="escursioni.html" onclick="closeMob()">Escursioni</a>
   <a href="index.html#footer" onclick="closeMob()">Contact</a>
 </div>
@@ -249,16 +254,8 @@ nav{
 
 <script>
 // ── ESCURSIONI (gestite da /admin, scritte nel repo come collection Jekyll) ──
-let events = [
-  {% for ev in site.escursioni %}
-  {
-    date: "{{ ev.date | date: '%Y-%m-%d' }}",
-    title: {{ ev.title | jsonify }},
-    desc: {{ ev.desc | jsonify }},
-    tags: {{ ev.tag_list | jsonify }}
-  }{% unless forloop.last %},{% endunless %}
-  {% endfor %}
-];
+// dati caricati da escursioni.json (generato da Jekyll dalla collection _escursioni)
+let events = [];
 
 // ── STATO ────────────────────────────────────────────
 let calYear, calMonth;
@@ -387,6 +384,7 @@ function renderList(){
     const card = document.createElement('div');
     card.className = 'event-card';
     const tags = ev.tags ? ev.tags.split(',').map(t=>t.trim()).filter(Boolean) : [];
+    const photos = ev.images || [];
     card.innerHTML = `
       <div class="event-date-block">
         <div class="event-day">${day}</div>
@@ -394,6 +392,7 @@ function renderList(){
       </div>
       <div class="event-body">
         <div class="event-title">${ev.title}</div>
+        ${photos.length ? `<div class="event-photos">${photos.map(src=>`<div class="event-photo"><img src="${src}" alt=""></div>`).join('')}</div>` : ''}
         ${ev.desc ? `<div class="event-desc">${ev.desc}</div>` : ''}
         ${tags.length ? `<div class="event-tags">${tags.map(t=>`<span class="event-tag">${t}</span>`).join('')}</div>` : ''}
       </div>`;
@@ -424,8 +423,11 @@ document.getElementById('mob-close').onclick=()=>document.getElementById('mob').
 function closeMob(){document.getElementById('mob').classList.remove('open')}
 
 // ── INIT ─────────────────────────────────────────────
-renderCal();
-renderList();
+fetch('escursioni.json')
+  .then(r => r.json())
+  .then(data => { events = data; })
+  .catch(() => { events = []; })
+  .finally(() => { renderCal(); renderList(); });
 </script>
 </body>
 </html>
