@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escursioni – Orobie Heritage</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F0EBE1;--parchment:#E8E1D5;--tan:#D4C8B4;
+  --sand:#C2B49A;--earth:#8C7A62;--bark:#5A4A36;
+  --peak:#2E2416;--rust:#9C6040;--sage:#7A8C74;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--bark);font-family:var(--sans);font-weight:300;min-height:100vh}
+img{display:block;max-width:100%}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 2.5rem;
+  background:rgba(240,235,225,.95);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--tan);
+}
+.nav-logo{text-decoration:none}
+.nav-logo img{height:56px;width:auto}
+.nav-center{display:flex;gap:2rem;list-style:none}
+.nav-center a{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--bark);text-decoration:none;transition:color .2s}
+.nav-center a:hover,.nav-center a.active{color:var(--rust)}
+.nav-lang{font-size:.68rem;letter-spacing:.12em;color:var(--earth)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--bark)}
+
+/* ── PAGE HEADER ── */
+.page-header{
+  padding:4rem 3rem 2.5rem;
+  max-width:1180px;margin:0 auto;
+}
+.page-eyebrow{
+  display:flex;align-items:center;gap:.9rem;
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rust);
+  margin-bottom:1rem;
+}
+.page-eyebrow::before{content:'';width:36px;height:1px;background:var(--rust)}
+.page-title{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(2.2rem,5vw,3.8rem);
+  color:var(--peak);line-height:1;margin-bottom:.8rem;
+}
+.page-sub{
+  font-family:var(--serif);font-style:italic;
+  font-size:1.1rem;color:var(--earth);
+}
+
+/* ── LAYOUT ── */
+.main{
+  max-width:1180px;margin:0 auto;
+  padding:0 3rem 5rem;
+  display:grid;grid-template-columns:1fr 340px;
+  gap:3rem;align-items:start;
+}
+
+/* ── CALENDARIO ── */
+.cal-wrap{background:var(--parchment);border:1px solid var(--tan);padding:1.8rem}
+.cal-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.5rem;
+}
+.cal-nav button{
+  background:none;border:1px solid var(--tan);
+  width:32px;height:32px;cursor:pointer;
+  font-size:1rem;color:var(--bark);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.cal-nav button:hover{background:var(--tan)}
+.cal-month{
+  font-family:var(--serif);font-size:1.3rem;
+  font-weight:300;color:var(--peak);letter-spacing:.02em;
+}
+.cal-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:3px;
+}
+.cal-dow{
+  font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--earth);text-align:center;padding:.4rem 0;
+}
+.cal-day{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;color:var(--bark);cursor:default;
+  position:relative;border-radius:50%;
+  transition:background .15s;
+}
+.cal-day.other-month{color:var(--sand);opacity:.5}
+.cal-day.today{font-weight:500;color:var(--rust)}
+.cal-day.today::after{
+  content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);
+  width:3px;height:3px;border-radius:50%;background:var(--rust);
+}
+.cal-day.has-event{
+  background:var(--bark);color:var(--cream);
+  cursor:pointer;border-radius:50%;
+}
+.cal-day.has-event:hover{background:var(--rust)}
+.cal-day.has-event.multi::after{
+  content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);
+  width:14px;height:2px;background:var(--sand);border-radius:1px;
+}
+
+/* ── LISTA EVENTI ── */
+.events-list{display:flex;flex-direction:column;gap:1rem}
+.events-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:.5rem;
+}
+.events-label{
+  font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rust);
+}
+.events-count{
+  font-family:var(--serif);font-style:italic;
+  font-size:.9rem;color:var(--earth);
+}
+.event-card{
+  background:var(--parchment);border:1px solid var(--tan);
+  padding:1.2rem 1.4rem;
+  display:grid;grid-template-columns:56px 1fr;
+  gap:1rem;align-items:start;
+  transition:border-color .2s;
+}
+.event-card:hover{border-color:var(--earth)}
+.event-date-block{
+  text-align:center;
+  border-right:1px solid var(--tan);
+  padding-right:1rem;
+}
+.event-day{
+  font-family:var(--serif);font-size:1.8rem;font-weight:300;
+  color:var(--peak);line-height:1;
+}
+.event-mon{
+  font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--earth);margin-top:2px;
+}
+.event-body{}
+.event-title{
+  font-family:var(--serif);font-size:1.05rem;
+  color:var(--peak);margin-bottom:.3rem;
+}
+.event-desc{
+  font-size:.78rem;color:var(--earth);line-height:1.5;
+}
+.event-tags{display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap}
+.event-tag{
+  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.2rem .55rem;background:var(--cream);
+  border:1px solid var(--tan);color:var(--earth);
+}
+.no-events{
+  font-family:var(--serif);font-style:italic;
+  font-size:1rem;color:var(--sand);text-align:center;
+  padding:2rem;
+}
+
+/* ── ADMIN TOGGLE ── */
+.admin-toggle{
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;
+  background:var(--bark);color:var(--cream);
+  border:none;cursor:pointer;
+  width:44px;height:44px;border-radius:50%;
+  font-size:1.1rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 12px rgba(46,36,22,.2);
+  transition:background .2s;
+}
+.admin-toggle:hover{background:var(--rust)}
+
+/* ── ADMIN PANEL ── */
+.admin-overlay{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(46,36,22,.45);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;
+}
+.admin-overlay.open{display:flex}
+.admin-panel{
+  background:var(--cream);
+  width:min(520px,95vw);
+  max-height:90vh;overflow-y:auto;
+  padding:2rem;
+  position:relative;
+}
+.admin-title{
+  font-family:var(--serif);font-size:1.5rem;font-weight:300;
+  color:var(--peak);margin-bottom:1.5rem;
+}
+.admin-close{
+  position:absolute;top:1.2rem;right:1.2rem;
+  background:none;border:none;font-size:1.2rem;
+  cursor:pointer;color:var(--earth);
+}
+.admin-close:hover{color:var(--rust)}
+
+/* form */
+.form-section{
+  border-top:1px solid var(--tan);padding-top:1.5rem;
+  margin-bottom:1.5rem;
+}
+.form-section-title{
+  font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:1rem;
+}
+.form-row{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem}
+.form-row label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--earth)}
+.form-row input,.form-row textarea,.form-row select{
+  background:var(--parchment);border:1px solid var(--tan);
+  padding:.55rem .8rem;
+  font-family:var(--sans);font-size:.85rem;color:var(--peak);
+  outline:none;transition:border-color .2s;
+  width:100%;
+}
+.form-row input:focus,.form-row textarea:focus{border-color:var(--earth)}
+.form-row textarea{resize:vertical;min-height:70px}
+.form-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn-add{
+  flex:1;padding:.65rem;
+  background:var(--bark);color:var(--cream);
+  border:none;cursor:pointer;
+  font-family:var(--sans);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;
+  transition:background .2s;
+}
+.btn-add:hover{background:var(--rust)}
+.btn-clear{
+  padding:.65rem 1rem;
+  background:none;color:var(--earth);
+  border:1px solid var(--tan);cursor:pointer;
+  font-family:var(--sans);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
+  transition:border-color .2s;
+}
+.btn-clear:hover{border-color:var(--earth)}
+
+/* admin event list */
+.admin-events{display:flex;flex-direction:column;gap:.6rem;margin-top:.5rem}
+.admin-event-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem .9rem;background:var(--parchment);
+  border:1px solid var(--tan);gap:1rem;
+}
+.admin-event-info{flex:1;min-width:0}
+.admin-event-date{font-size:.62rem;letter-spacing:.1em;color:var(--earth);text-transform:uppercase}
+.admin-event-name{font-family:var(--serif);font-size:.98rem;color:var(--peak);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-event-actions{display:flex;gap:.4rem;flex-shrink:0}
+.btn-edit,.btn-del{
+  background:none;border:1px solid var(--tan);
+  padding:.3rem .6rem;cursor:pointer;
+  font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .2s,border-color .2s;
+}
+.btn-edit{color:var(--earth)}
+.btn-edit:hover{background:var(--tan)}
+.btn-del{color:var(--rust);border-color:rgba(156,96,64,.3)}
+.btn-del:hover{background:rgba(156,96,64,.1)}
+
+/* password overlay */
+.pw-overlay{
+  display:none;position:fixed;inset:0;z-index:600;
+  background:rgba(46,36,22,.5);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;
+}
+.pw-overlay.open{display:flex}
+.pw-box{
+  background:var(--cream);padding:2rem;width:min(340px,90vw);
+  text-align:center;
+}
+.pw-box h2{font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--peak);margin-bottom:1.2rem}
+.pw-box input{
+  width:100%;padding:.6rem .8rem;
+  background:var(--parchment);border:1px solid var(--tan);
+  font-family:var(--sans);font-size:.9rem;color:var(--peak);
+  outline:none;margin-bottom:.8rem;text-align:center;letter-spacing:.2em;
+}
+.pw-box button{
+  width:100%;padding:.65rem;
+  background:var(--bark);color:var(--cream);border:none;cursor:pointer;
+  font-family:var(--sans);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;
+  transition:background .2s;
+}
+.pw-box button:hover{background:var(--rust)}
+.pw-err{font-size:.75rem;color:var(--rust);margin-top:.5rem;min-height:1rem}
+
+/* mob */
+.mob-menu{display:none;position:fixed;inset:0;z-index:400;background:var(--cream);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:var(--serif);font-size:2rem;color:var(--peak);text-decoration:none}
+.mob-close{position:absolute;top:1.4rem;right:2rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--bark)}
+
+@media(max-width:900px){
+  nav{padding:.8rem 1.4rem}
+  .nav-center,.nav-lang{display:none}
+  .hamburger{display:flex}
+  .page-header{padding:2.5rem 1.4rem 1.5rem}
+  .main{grid-template-columns:1fr;padding:0 1.4rem 3rem}
+}
+@media(max-width:520px){
+  .page-header{padding:2rem 1rem 1.2rem}
+  .main{padding:0 1rem 2.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo1.png" alt="Orobie Heritage">
+  </a>
+  <ul class="nav-center">
+    <li><a href="index.html#intro">Explore</a></li>
+    <li><a href="index.html#intro">Landscape</a></li>
+    <li><a href="index.html#about">Journal</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="escursioni.html" class="active">Escursioni</a></li>
+    <li><a href="index.html#footer">Contact</a></li>
+  </ul>
+  <span class="nav-lang">EN ▾</span>
+  <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mob-menu" id="mob">
+  <button class="mob-close" id="mob-close">✕</button>
+  <a href="index.html#intro" onclick="closeMob()">Explore</a>
+  <a href="index.html#about" onclick="closeMob()">Journal</a>
+  <a href="escursioni.html" onclick="closeMob()">Escursioni</a>
+  <a href="index.html#footer" onclick="closeMob()">Contact</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-eyebrow">Calendario</div>
+  <h1 class="page-title">Escursioni</h1>
+  <p class="page-sub">Tutte le uscite in programma nelle Orobie.</p>
+</div>
+
+<!-- MAIN GRID -->
+<div class="main">
+
+  <!-- CALENDARIO -->
+  <div>
+    <div class="cal-wrap">
+      <div class="cal-nav">
+        <button id="prevMonth">&#8592;</button>
+        <span class="cal-month" id="calMonth"></span>
+        <button id="nextMonth">&#8594;</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+  </div>
+
+  <!-- LISTA EVENTI -->
+  <div>
+    <div class="events-header">
+      <span class="events-label" id="eventsLabel">Prossime escursioni</span>
+      <span class="events-count" id="eventsCount"></span>
+    </div>
+    <div class="events-list" id="eventsList"></div>
+  </div>
+
+</div>
+
+<!-- ADMIN TOGGLE -->
+<button class="admin-toggle" id="adminToggle" title="Admin">✎</button>
+
+<!-- PASSWORD OVERLAY -->
+<div class="pw-overlay" id="pwOverlay">
+  <div class="pw-box">
+    <h2>Area Admin</h2>
+    <input type="password" id="pwInput" placeholder="••••••" maxlength="30">
+    <button onclick="checkPw()">Entra</button>
+    <p class="pw-err" id="pwErr"></p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <button class="admin-close" id="adminClose">✕</button>
+    <h2 class="admin-title">Gestione Escursioni</h2>
+
+    <div class="form-section">
+      <p class="form-section-title" id="formTitle">Nuova escursione</p>
+
+      <div class="form-row">
+        <label>Data</label>
+        <input type="date" id="fDate">
+      </div>
+      <div class="form-row">
+        <label>Titolo</label>
+        <input type="text" id="fTitle" placeholder="es. Cima Grem via ferrata">
+      </div>
+      <div class="form-row">
+        <label>Descrizione breve</label>
+        <textarea id="fDesc" placeholder="Difficoltà, durata, punto di ritrovo..."></textarea>
+      </div>
+      <div class="form-row">
+        <label>Tag (separati da virgola)</label>
+        <input type="text" id="fTags" placeholder="es. Media difficoltà, 6h, Presolana">
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-add" onclick="saveEvent()">Salva escursione</button>
+        <button class="btn-clear" onclick="resetForm()">Annulla</button>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <p class="form-section-title">Escursioni salvate</p>
+      <div class="admin-events" id="adminEvents"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PASSWORD (cambia qui la tua) ──────────────────────
+const ADMIN_PW = 'orobie2024';
+
+// ── STORAGE ──────────────────────────────────────────
+function loadEvents(){
+  try{ return JSON.parse(localStorage.getItem('oh_events')||'[]') }
+  catch(e){ return [] }
+}
+function saveEvents(evs){
+  localStorage.setItem('oh_events', JSON.stringify(evs));
+}
+
+// ── STATO ────────────────────────────────────────────
+let events = loadEvents();
+let editingId = null;
+let calYear, calMonth;
+let filterDate = null; // null = mostra tutti
+
+const now = new Date();
+calYear  = now.getFullYear();
+calMonth = now.getMonth();
+
+// ── MESI/GIORNI IT ───────────────────────────────────
+const MONTHS = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno',
+                'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+const MONS_SHORT = ['Gen','Feb','Mar','Apr','Mag','Giu',
+                    'Lug','Ago','Set','Ott','Nov','Dic'];
+const DAYS = ['Lun','Mar','Mer','Gio','Ven','Sab','Dom'];
+
+// ── CALENDARIO ───────────────────────────────────────
+function renderCal(){
+  document.getElementById('calMonth').textContent = MONTHS[calMonth] + ' ' + calYear;
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  DAYS.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'cal-dow';
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+
+  const first = new Date(calYear, calMonth, 1);
+  // lunedì = 0
+  let startDow = first.getDay() - 1;
+  if(startDow < 0) startDow = 6;
+
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const prevDays    = new Date(calYear, calMonth, 0).getDate();
+
+  // giorni mese precedente
+  for(let i = startDow-1; i >= 0; i--){
+    const el = document.createElement('div');
+    el.className = 'cal-day other-month';
+    el.textContent = prevDays - i;
+    grid.appendChild(el);
+  }
+
+  const todayStr = toDateStr(now);
+
+  for(let d = 1; d <= daysInMonth; d++){
+    const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dayEvs  = events.filter(e => e.date === dateStr);
+    const el      = document.createElement('div');
+    el.className  = 'cal-day';
+    if(dateStr === todayStr) el.classList.add('today');
+    if(dayEvs.length === 1) el.classList.add('has-event');
+    if(dayEvs.length > 1)  { el.classList.add('has-event','multi') }
+    el.textContent = d;
+    if(dayEvs.length){
+      el.title = dayEvs.map(e=>e.title).join(', ');
+      el.addEventListener('click', ()=>{ filterDate = dateStr; renderList(); });
+    }
+    grid.appendChild(el);
+  }
+
+  // giorni mese successivo
+  const total = startDow + daysInMonth;
+  const trailing = total % 7 === 0 ? 0 : 7 - (total % 7);
+  for(let d = 1; d <= trailing; d++){
+    const el = document.createElement('div');
+    el.className = 'cal-day other-month';
+    el.textContent = d;
+    grid.appendChild(el);
+  }
+}
+
+document.getElementById('prevMonth').onclick = ()=>{
+  calMonth--; if(calMonth<0){calMonth=11;calYear--}
+  filterDate=null; renderCal(); renderList();
+};
+document.getElementById('nextMonth').onclick = ()=>{
+  calMonth++; if(calMonth>11){calMonth=0;calYear++}
+  filterDate=null; renderCal(); renderList();
+};
+
+// ── LISTA ────────────────────────────────────────────
+function renderList(){
+  const list  = document.getElementById('eventsList');
+  const label = document.getElementById('eventsLabel');
+  const count = document.getElementById('eventsCount');
+  list.innerHTML = '';
+
+  let shown = [...events];
+
+  if(filterDate){
+    shown = shown.filter(e => e.date === filterDate);
+    label.textContent = 'Escursioni del ' + formatDateLong(filterDate);
+  } else {
+    // mostra dal mese corrente in poi, ordinate
+    const monthStart = `${calYear}-${String(calMonth+1).padStart(2,'0')}-01`;
+    shown = shown.filter(e => e.date >= monthStart).sort((a,b)=>a.date.localeCompare(b.date));
+    label.textContent = 'Prossime escursioni';
+  }
+
+  count.textContent = shown.length ? shown.length + (shown.length===1?' escursione':' escursioni') : '';
+
+  if(!shown.length){
+    const el = document.createElement('div');
+    el.className = 'no-events';
+    el.textContent = filterDate ? 'Nessuna escursione in questa data.' : 'Nessuna escursione in programma.';
+    // link per tornare a tutti
+    if(filterDate){
+      const btn = document.createElement('div');
+      btn.style.cssText='margin-top:.8rem;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);cursor:pointer';
+      btn.textContent='← Mostra tutte';
+      btn.onclick=()=>{filterDate=null;renderList()};
+      el.appendChild(btn);
+    }
+    list.appendChild(el);
+    return;
+  }
+
+  shown.forEach(ev => {
+    const d   = new Date(ev.date+'T12:00:00');
+    const day = String(d.getDate()).padStart(2,'0');
+    const mon = MONS_SHORT[d.getMonth()];
+
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    const tags = ev.tags ? ev.tags.split(',').map(t=>t.trim()).filter(Boolean) : [];
+    card.innerHTML = `
+      <div class="event-date-block">
+        <div class="event-day">${day}</div>
+        <div class="event-mon">${mon}</div>
+      </div>
+      <div class="event-body">
+        <div class="event-title">${ev.title}</div>
+        ${ev.desc ? `<div class="event-desc">${ev.desc}</div>` : ''}
+        ${tags.length ? `<div class="event-tags">${tags.map(t=>`<span class="event-tag">${t}</span>`).join('')}</div>` : ''}
+      </div>`;
+    list.appendChild(card);
+  });
+
+  if(filterDate){
+    const btn = document.createElement('div');
+    btn.style.cssText='margin-top:.5rem;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);cursor:pointer;text-align:center';
+    btn.textContent='← Mostra tutte';
+    btn.onclick=()=>{filterDate=null;renderList()};
+    list.appendChild(btn);
+  }
+}
+
+// ── ADMIN ────────────────────────────────────────────
+let adminUnlocked = false;
+
+document.getElementById('adminToggle').onclick = ()=>{
+  if(adminUnlocked){ openAdmin() }
+  else { document.getElementById('pwOverlay').classList.add('open');
+         document.getElementById('pwInput').value='';
+         document.getElementById('pwErr').textContent='';
+         setTimeout(()=>document.getElementById('pwInput').focus(),100); }
+};
+document.getElementById('pwInput').addEventListener('keydown', e=>{ if(e.key==='Enter') checkPw() });
+
+function checkPw(){
+  const v = document.getElementById('pwInput').value;
+  if(v === ADMIN_PW){
+    adminUnlocked = true;
+    document.getElementById('pwOverlay').classList.remove('open');
+    openAdmin();
+  } else {
+    document.getElementById('pwErr').textContent = 'Password errata.';
+    document.getElementById('pwInput').value='';
+  }
+}
+
+function openAdmin(){
+  document.getElementById('adminOverlay').classList.add('open');
+  renderAdminList();
+}
+document.getElementById('adminClose').onclick = ()=>{
+  document.getElementById('adminOverlay').classList.remove('open');
+  resetForm();
+};
+
+function renderAdminList(){
+  const container = document.getElementById('adminEvents');
+  container.innerHTML = '';
+  const sorted = [...events].sort((a,b)=>a.date.localeCompare(b.date));
+  if(!sorted.length){
+    container.innerHTML = '<p style="font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--sand)">Nessuna escursione salvata.</p>';
+    return;
+  }
+  sorted.forEach(ev => {
+    const row = document.createElement('div');
+    row.className = 'admin-event-row';
+    row.innerHTML = `
+      <div class="admin-event-info">
+        <div class="admin-event-date">${formatDateLong(ev.date)}</div>
+        <div class="admin-event-name">${ev.title}</div>
+      </div>
+      <div class="admin-event-actions">
+        <button class="btn-edit" onclick="editEvent('${ev.id}')">Modifica</button>
+        <button class="btn-del"  onclick="deleteEvent('${ev.id}')">Elimina</button>
+      </div>`;
+    container.appendChild(row);
+  });
+}
+
+function saveEvent(){
+  const date  = document.getElementById('fDate').value;
+  const title = document.getElementById('fTitle').value.trim();
+  const desc  = document.getElementById('fDesc').value.trim();
+  const tags  = document.getElementById('fTags').value.trim();
+
+  if(!date || !title){
+    alert('Data e titolo sono obbligatori.');
+    return;
+  }
+
+  if(editingId){
+    const idx = events.findIndex(e=>e.id===editingId);
+    if(idx>-1) events[idx] = {id:editingId, date, title, desc, tags};
+  } else {
+    events.push({id: Date.now().toString(), date, title, desc, tags});
+  }
+
+  saveEvents(events);
+  resetForm();
+  renderCal();
+  renderList();
+  renderAdminList();
+}
+
+function editEvent(id){
+  const ev = events.find(e=>e.id===id);
+  if(!ev) return;
+  editingId = id;
+  document.getElementById('fDate').value  = ev.date;
+  document.getElementById('fTitle').value = ev.title;
+  document.getElementById('fDesc').value  = ev.desc||'';
+  document.getElementById('fTags').value  = ev.tags||'';
+  document.getElementById('formTitle').textContent = 'Modifica escursione';
+  document.getElementById('fTitle').focus();
+}
+
+function deleteEvent(id){
+  if(!confirm('Eliminare questa escursione?')) return;
+  events = events.filter(e=>e.id!==id);
+  saveEvents(events);
+  renderCal();
+  renderList();
+  renderAdminList();
+}
+
+function resetForm(){
+  editingId=null;
+  document.getElementById('fDate').value='';
+  document.getElementById('fTitle').value='';
+  document.getElementById('fDesc').value='';
+  document.getElementById('fTags').value='';
+  document.getElementById('formTitle').textContent='Nuova escursione';
+}
+
+// ── UTILS ────────────────────────────────────────────
+function toDateStr(d){
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function formatDateLong(str){
+  const d = new Date(str+'T12:00:00');
+  return d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear();
+}
+
+// ── MOBILE ───────────────────────────────────────────
+document.getElementById('ham').onclick=()=>document.getElementById('mob').classList.add('open');
+document.getElementById('mob-close').onclick=()=>document.getElementById('mob').classList.remove('open');
+function closeMob(){document.getElementById('mob').classList.remove('open')}
+
+// ── INIT ─────────────────────────────────────────────
+renderCal();
+renderList();
+</script>
+</body>
+</html>
