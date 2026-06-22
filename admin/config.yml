@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: fabioloca96/Orobie-Heritage
+  branch: main
+  # base_url: https://TUO-WORKER.workers.dev
+  # ↑ da scommentare e completare dopo aver pubblicato tools/cms-oauth-worker.js
+  #   (vedi istruzioni nel README di quel file). Finché manca, il login qui sotto non funziona.
+
+site_url: https://fabioloca96.github.io/Orobie-Heritage
+display_url: https://fabioloca96.github.io/Orobie-Heritage
+publish_mode: simple
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "escursioni"
+    label: "Escursioni"
+    label_singular: "Escursione"
+    folder: "_escursioni"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Data", name: "date", widget: "date", format: "YYYY-MM-DD"}
+      - {label: "Titolo", name: "title", widget: "string"}
+      - {label: "Descrizione breve", name: "desc", widget: "text", required: false}
+      - {label: "Tag (separati da virgola)", name: "tag_list", widget: "string", required: false, hint: "es. Media difficoltà, 6h, Presolana"}

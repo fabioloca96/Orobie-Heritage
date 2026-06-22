@@ -1,0 +1,9 @@
+title: Orobie Heritage
+description: Guided walks and nature stories in the Orobie Alps
+
+collections:
+  escursioni:
+    output: false
+
+exclude:
+  - "ALL.1 richiesta autorizzazione libera professione.doc"
