@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -c /dev/null)",
+      "Read(//tmp/oh_check/**)",
+      "Bash(sed '1d;$d')",
+      "Read(//tmp/**)",
+      "Bash(jekyll build *)",
+      "Bash(jekyll serve *)"
+    ]
+  }
+}
