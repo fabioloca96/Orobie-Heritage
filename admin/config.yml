@@ -9,7 +9,7 @@ display_url: https://fabioloca96.github.io/Orobie-Heritage
 publish_mode: simple
 
 media_folder: "images/uploads"
-public_folder: "/images/uploads"
+public_folder: "images/uploads"
 
 collections:
   - name: "escursioni"
