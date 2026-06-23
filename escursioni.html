@@ -59,6 +59,25 @@ nav{
   font-size:1.1rem;color:var(--earth);
 }
 
+/* ── LEGENDA CATEGORIE ── */
+.cat-legend{
+  max-width:1180px;margin:0 auto;padding:0 3rem 1.6rem;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem 2rem;
+}
+.legend-item{
+  display:flex;align-items:baseline;gap:.55rem;
+  font-family:var(--sans);font-size:.78rem;color:var(--earth);
+}
+.legend-item strong{color:var(--peak);font-weight:500}
+.legend-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+  display:inline-block;margin-top:.25em;
+}
+.legend-dot.cat-in-vetta{background:var(--rust)}
+.legend-dot.cat-naturalistiche{background:var(--sage)}
+.legend-dot.cat-micologiche{background:var(--earth)}
+.legend-dot.cat-e-bike{background:var(--slate)}
+
 /* ── FILTRI CATEGORIA ── */
 .cat-filters{
   max-width:1180px;margin:0 auto;padding:0 3rem;
@@ -210,10 +229,16 @@ nav{
   .nav-center,.nav-lang{display:none}
   .hamburger{display:flex}
   .page-header{padding:2.5rem 1.4rem 1.5rem}
+  .cat-legend{padding:0 1.4rem 1.2rem}
+  .cat-filters{padding:0 1.4rem}
+  .cat-caption{padding:0 1.4rem}
   .main{grid-template-columns:1fr;padding:0 1.4rem 3rem}
 }
 @media(max-width:520px){
   .page-header{padding:2rem 1rem 1.2rem}
+  .cat-legend{grid-template-columns:1fr;padding:0 1rem 1rem}
+  .cat-filters{padding:0 1rem}
+  .cat-caption{padding:0 1rem}
   .main{padding:0 1rem 2.5rem}
 }
 </style>
@@ -252,6 +277,14 @@ nav{
   <div class="page-eyebrow">Calendario</div>
   <h1 class="page-title">Escursioni</h1>
   <p class="page-sub">Tutte le uscite in programma nelle Orobie.</p>
+</div>
+
+<!-- LEGENDA CATEGORIE -->
+<div class="cat-legend">
+  <div class="legend-item"><span class="legend-dot cat-in-vetta"></span><strong>In Vetta</strong> — cime, creste, dislivello.</div>
+  <div class="legend-item"><span class="legend-dot cat-naturalistiche"></span><strong>Naturalistiche</strong> — botanica, geologia, fauna, fossili.</div>
+  <div class="legend-item"><span class="legend-dot cat-micologiche"></span><strong>Micologiche</strong> — funghi, bosco, stagionalità.</div>
+  <div class="legend-item"><span class="legend-dot cat-e-bike"></span><strong>E-Bike</strong> — percorsi assistiti, accessibili a tutti.</div>
 </div>
 
 <!-- FILTRI CATEGORIA -->
@@ -486,6 +519,14 @@ document.getElementById('mob-close').onclick=()=>document.getElementById('mob').
 function closeMob(){document.getElementById('mob').classList.remove('open')}
 
 // ── INIT ─────────────────────────────────────────────
+// se si arriva da un link con #categoria (es. dalle card in home), pre-seleziona il filtro
+const initialCat = window.location.hash.replace('#','');
+if(initialCat && CAT_INFO[initialCat]){
+  filterCategory = initialCat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === initialCat));
+  document.getElementById('catCaption').textContent = CAT_INFO[initialCat].caption;
+}
+
 fetch('escursioni.json')
   .then(r => r.json())
   .then(data => { events = data; })

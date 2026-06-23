@@ -111,7 +111,7 @@ nav.scrolled .hamburger span{background:var(--bark)}
 }
 .hero-mist{
   position:absolute;inset:0;z-index:4;
-  background:radial-gradient(ellipse 70% 60% at 50% 70%,
+  background:radial-gradient(ellipse 80% 60% at 50% 70%,
     rgba(240,235,225,1.25) 5%,
     rgba(240,235,225,.35) 40%,
     rgba(240,235,225,0) 70%);
@@ -169,7 +169,7 @@ nav.scrolled .hamburger span{background:var(--bark)}
 .hero-tag{
   font-family:var(--serif);font-style:italic;font-weight:300;
   font-size:clamp(1.7rem,2.5vw,1.6rem);
-  line-height:1.5;opacity:.9;color:var(--peak);
+  line-height:1.5;opacity: 1 ;color:var(--peak);
 }
 
 /* ══════════════════════════════════════
@@ -211,7 +211,8 @@ section{padding:5.5rem 3rem}
 .arr-link::after{content:' →'}
 .arr-link:hover{color:var(--rust)}
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-.card{background:var(--cream)}
+.card{background:var(--cream);display:block;text-decoration:none;color:inherit;transition:opacity .2s}
+.card:hover{opacity:.82}
 .card-img{aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,var(--mist),var(--tan));display:flex;align-items:center;justify-content:center}
 .card-body{padding:.85rem 1rem 1.1rem}
 .card-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--peak);margin-bottom:.25rem}
@@ -408,10 +409,10 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
     </div>
   </div>
   <div class="cards">
-    <div class="card r"><div class="card-img"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M8 38 L18 22 L28 30 L36 14 L44 20" stroke="#C2B49A" stroke-width="1.2" fill="none"/><circle cx="36" cy="12" r="3" stroke="#C2B49A" stroke-width="1" fill="none"/></svg></div><div class="card-body"><p class="card-label">Easy Walks</p><p class="card-sub">For everyone</p></div></div>
-    <div class="card r" style="transition-delay:.08s"><div class="card-img"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 8 Q28 16 24 24 Q20 16 24 8Z" fill="#C2B49A" opacity=".5"/><path d="M14 14 Q20 18 24 24 Q18 20 14 14Z" fill="#C2B49A" opacity=".4"/><path d="M34 14 Q28 18 24 24 Q30 20 34 14Z" fill="#C2B49A" opacity=".4"/><circle cx="24" cy="26" r="3" fill="#9C6040" opacity=".5"/></svg></div><div class="card-body"><p class="card-label">Nature Discovery</p><p class="card-sub">Flora, fauna and seasons</p></div></div>
-    <div class="card r" style="transition-delay:.16s"><div class="card-img"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M8 34 L16 24 Q22 16 24 12 Q26 16 32 24 L40 34" stroke="#C2B49A" stroke-width="1" fill="none"/><path d="M14 28 L24 12 L34 28" stroke="#C2B49A" stroke-width=".6" fill="none" opacity=".5"/></svg></div><div class="card-body"><p class="card-label">Hidden Paths</p><p class="card-sub">Off the beaten track</p></div></div>
-    <div class="card r" style="transition-delay:.24s"><div class="card-img"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="16" y="8" width="16" height="22" rx="1" stroke="#C2B49A" stroke-width="1" fill="none"/><path d="M12 30 L36 30" stroke="#C2B49A" stroke-width="1"/><line x1="24" y1="8" x2="24" y2="4" stroke="#C2B49A" stroke-width=".8"/><path d="M20 4 L28 4" stroke="#C2B49A" stroke-width=".8"/><rect x="20" y="18" width="8" height="12" rx="1" stroke="#C2B49A" stroke-width=".7" fill="none"/></svg></div><div class="card-body"><p class="card-label">Culture &amp; Traditions</p><p class="card-sub">Stories, people and places</p></div></div>
+    <a class="card r" href="escursioni.html#in-vetta"><div class="card-img"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M8 38 L18 22 L28 30 L36 14 L44 20" stroke="#C2B49A" stroke-width="1.2" fill="none"/><circle cx="36" cy="12" r="3" stroke="#C2B49A" stroke-width="1" fill="none"/></svg></div><div class="card-body"><p class="card-label">In Vetta</p><p class="card-sub">Cime, creste, dislivello</p></div></a>
+    <a class="card r" href="escursioni.html#naturalistiche" style="transition-delay:.08s"><div class="card-img"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 8 Q28 16 24 24 Q20 16 24 8Z" fill="#C2B49A" opacity=".5"/><path d="M14 14 Q20 18 24 24 Q18 20 14 14Z" fill="#C2B49A" opacity=".4"/><path d="M34 14 Q28 18 24 24 Q30 20 34 14Z" fill="#C2B49A" opacity=".4"/><circle cx="24" cy="26" r="3" fill="#9C6040" opacity=".5"/></svg></div><div class="card-body"><p class="card-label">Naturalistiche</p><p class="card-sub">Botanica, geologia, fauna, fossili</p></div></a>
+    <a class="card r" href="escursioni.html#micologiche" style="transition-delay:.16s"><div class="card-img"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M10 22 Q10 10 24 10 Q38 10 38 22 Q38 24.5 35.5 24.5 L12.5 24.5 Q10 24.5 10 22Z" stroke="#C2B49A" stroke-width="1.2" fill="none"/><path d="M20 24.5 L20.5 36 Q20.5 39 24 39 Q27.5 39 27.5 36 L28 24.5" stroke="#C2B49A" stroke-width="1.2" fill="none"/><circle cx="18" cy="17" r="1.1" fill="#C2B49A" opacity=".6"/><circle cx="27" cy="15" r=".9" fill="#C2B49A" opacity=".5"/><circle cx="31" cy="19" r="1.1" fill="#C2B49A" opacity=".6"/></svg></div><div class="card-body"><p class="card-label">Micologiche</p><p class="card-sub">Funghi, bosco, stagionalità</p></div></a>
+    <a class="card r" href="escursioni.html#e-bike" style="transition-delay:.24s"><div class="card-img"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="14" cy="34" r="7" stroke="#C2B49A" stroke-width="1.2" fill="none"/><circle cx="34" cy="34" r="7" stroke="#C2B49A" stroke-width="1.2" fill="none"/><path d="M14 34 L22 18 L30 18 M22 18 L28 34 M14 34 L28 34 M28 34 L34 34" stroke="#C2B49A" stroke-width="1.2" fill="none" stroke-linejoin="round"/><path d="M18 13 L26 13" stroke="#C2B49A" stroke-width="1" opacity=".7"/><path d="M24.5 22 L21.5 27 L24.5 27 L22 32" stroke="#9C6040" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="card-body"><p class="card-label">E-Bike</p><p class="card-sub">Percorsi assistiti, per tutti</p></div></a>
   </div>
 </div>
 </section>
