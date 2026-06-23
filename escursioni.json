@@ -4,6 +4,7 @@
   {% for ev in site.escursioni %}
   {
     "date": "{{ ev.date | date: '%Y-%m-%d' }}",
+    "category": {{ ev.category | jsonify }},
     "title": {{ ev.title | jsonify }},
     "desc": {{ ev.desc | jsonify }},
     "tags": {{ ev.tag_list | jsonify }},

@@ -1,5 +1,6 @@
 ---
 date: 2026-06-28
+category: naturalistiche
 title: Anello della Presolana
 images:
   - images/uploads/img_0839.jpg

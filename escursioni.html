@@ -13,6 +13,7 @@
   --cream:#F0EBE1;--parchment:#E8E1D5;--tan:#D4C8B4;
   --sand:#C2B49A;--earth:#8C7A62;--bark:#5A4A36;
   --peak:#2E2416;--rust:#9C6040;--sage:#7A8C74;
+  --slate:#6E8B95;
   --serif:'Cormorant Garamond',Georgia,serif;
   --sans:'Jost',system-ui,sans-serif;
 }
@@ -56,6 +57,24 @@ nav{
 .page-sub{
   font-family:var(--serif);font-style:italic;
   font-size:1.1rem;color:var(--earth);
+}
+
+/* ── FILTRI CATEGORIA ── */
+.cat-filters{
+  max-width:1180px;margin:0 auto;padding:0 3rem;
+  display:flex;gap:.6rem;flex-wrap:wrap;
+}
+.cat-btn{
+  font-family:var(--sans);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.5rem 1.1rem;border:1px solid var(--tan);background:var(--parchment);color:var(--bark);
+  cursor:pointer;transition:background .2s,color .2s,border-color .2s;
+}
+.cat-btn:hover{border-color:var(--earth)}
+.cat-btn.active{background:var(--bark);color:var(--cream);border-color:var(--bark)}
+.cat-caption{
+  max-width:1180px;margin:.9rem auto 0;padding:0 3rem;
+  font-family:var(--serif);font-style:italic;
+  font-size:.95rem;color:var(--earth);
 }
 
 /* ── LAYOUT ── */
@@ -149,6 +168,15 @@ nav{
   color:var(--earth);margin-top:2px;
 }
 .event-body{}
+.event-cat{
+  display:inline-block;font-family:var(--sans);
+  font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.2rem .55rem;margin-bottom:.45rem;color:#fff;
+}
+.event-cat.cat-in-vetta{background:var(--rust)}
+.event-cat.cat-naturalistiche{background:var(--sage)}
+.event-cat.cat-micologiche{background:var(--earth)}
+.event-cat.cat-e-bike{background:var(--slate)}
 .event-title{
   font-family:var(--serif);font-size:1.05rem;
   color:var(--peak);margin-bottom:.3rem;
@@ -226,6 +254,16 @@ nav{
   <p class="page-sub">Tutte le uscite in programma nelle Orobie.</p>
 </div>
 
+<!-- FILTRI CATEGORIA -->
+<div class="cat-filters" id="catFilters">
+  <button class="cat-btn active" data-cat="">Tutte</button>
+  <button class="cat-btn" data-cat="in-vetta">In Vetta</button>
+  <button class="cat-btn" data-cat="naturalistiche">Naturalistiche</button>
+  <button class="cat-btn" data-cat="micologiche">Micologiche</button>
+  <button class="cat-btn" data-cat="e-bike">E-Bike</button>
+</div>
+<p class="cat-caption" id="catCaption">Tutte le uscite, di ogni tipo.</p>
+
 <!-- MAIN GRID -->
 <div class="main">
 
@@ -260,10 +298,32 @@ let events = [];
 // ── STATO ────────────────────────────────────────────
 let calYear, calMonth;
 let filterDate = null; // null = mostra tutti
+let filterCategory = ''; // '' = tutte le categorie
 
 const now = new Date();
 calYear  = now.getFullYear();
 calMonth = now.getMonth();
+
+// ── CATEGORIE ────────────────────────────────────────
+const CAT_INFO = {
+  '':              {label:'Tutte',           caption:'Tutte le uscite, di ogni tipo.'},
+  'in-vetta':       {label:'In Vetta',        caption:'Cime, creste, dislivello.'},
+  'naturalistiche': {label:'Naturalistiche',  caption:'Botanica, geologia, fauna, fossili.'},
+  'micologiche':    {label:'Micologiche',     caption:'Funghi, bosco, stagionalità.'},
+  'e-bike':         {label:'E-Bike',          caption:'Percorsi assistiti, accessibili a tutti.'}
+};
+
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterCategory = btn.dataset.cat;
+    document.getElementById('catCaption').textContent = CAT_INFO[filterCategory].caption;
+    filterDate = null;
+    renderCal();
+    renderList();
+  });
+});
 
 // ── MESI/GIORNI IT ───────────────────────────────────
 const MONTHS = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno',
@@ -305,7 +365,7 @@ function renderCal(){
 
   for(let d = 1; d <= daysInMonth; d++){
     const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const dayEvs  = events.filter(e => e.date === dateStr);
+    const dayEvs  = events.filter(e => e.date === dateStr && (!filterCategory || e.category === filterCategory));
     const el      = document.createElement('div');
     el.className  = 'cal-day';
     if(dateStr === todayStr) el.classList.add('today');
@@ -348,6 +408,8 @@ function renderList(){
 
   let shown = [...events];
 
+  if(filterCategory) shown = shown.filter(e => e.category === filterCategory);
+
   if(filterDate){
     shown = shown.filter(e => e.date === filterDate);
     label.textContent = 'Escursioni del ' + formatDateLong(filterDate);
@@ -363,7 +425,7 @@ function renderList(){
   if(!shown.length){
     const el = document.createElement('div');
     el.className = 'no-events';
-    el.textContent = filterDate ? 'Nessuna escursione in questa data.' : 'Nessuna escursione in programma.';
+    el.textContent = filterDate ? 'Nessuna escursione in questa data.' : (filterCategory ? 'Nessuna escursione di questa categoria in programma.' : 'Nessuna escursione in programma.');
     // link per tornare a tutti
     if(filterDate){
       const btn = document.createElement('div');
@@ -391,6 +453,7 @@ function renderList(){
         <div class="event-mon">${mon}</div>
       </div>
       <div class="event-body">
+        ${ev.category && CAT_INFO[ev.category] ? `<span class="event-cat cat-${ev.category}">${CAT_INFO[ev.category].label}</span>` : ''}
         <div class="event-title">${ev.title}</div>
         ${photos.length ? `<div class="event-photos">${photos.map(src=>`<div class="event-photo"><img src="${src}" alt=""></div>`).join('')}</div>` : ''}
         ${ev.desc ? `<div class="event-desc">${ev.desc}</div>` : ''}

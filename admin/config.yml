@@ -21,6 +21,7 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Data", name: "date", widget: "date", format: "YYYY-MM-DD"}
+      - {label: "Categoria", name: "category", widget: "select", options: [{label: "In Vetta", value: "in-vetta"}, {label: "Naturalistiche", value: "naturalistiche"}, {label: "Micologiche", value: "micologiche"}, {label: "E-Bike", value: "e-bike"}]}
       - {label: "Titolo", name: "title", widget: "string"}
       - {label: "Foto (massimo 2)", name: "images", widget: "list", required: false, max: 2, field: {label: "Foto", name: "image", widget: "image"}}
       - {label: "Descrizione breve", name: "desc", widget: "text", required: false}
