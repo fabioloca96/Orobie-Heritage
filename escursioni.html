@@ -34,7 +34,7 @@ nav{
 .nav-center{display:flex;gap:2rem;list-style:none}
 .nav-center a{font-size:1.1rem;letter-spacing:.15em;text-transform:uppercase;color:var(--bark);text-decoration:none;transition:color .2s}
 .nav-center a:hover,.nav-center a.active{color:var(--rust)}
-.nav-lang{font-size:.85rem;letter-spacing:.12em;color:var(--earth)}
+.nav-lang{font-size:.85rem;letter-spacing:.12em;color:var(--earth);text-decoration:none}
 .hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--bark)}
 
@@ -251,25 +251,25 @@ nav{
     <img src="images/logo1.png" alt="Orobie Heritage">
   </a>
   <ul class="nav-center">
-    <li><a href="index.html#intro">Explore</a></li>
-    <li><a href="index.html#intro">Landscape</a></li>
-    <li><a href="index.html#about">Journal</a></li>
-    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#intro">Scopri</a></li>
+    <li><a href="index.html#intro">Paesaggio</a></li>
+    <li><a href="index.html#about">Diario</a></li>
+    <li><a href="index.html#about">Chi Sono</a></li>
     <li><a href="esperienze.html">Esperienze</a></li>
     <li><a href="escursioni.html" class="active">Escursioni</a></li>
-    <li><a href="index.html#footer">Contact</a></li>
+    <li><a href="index.html#footer">Contatti</a></li>
   </ul>
-  <span class="nav-lang">EN ▾</span>
+  <a href="en/excursions.html" class="nav-lang">EN</a>
   <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mob-menu" id="mob">
   <button class="mob-close" id="mob-close">✕</button>
-  <a href="index.html#intro" onclick="closeMob()">Explore</a>
-  <a href="index.html#about" onclick="closeMob()">Journal</a>
+  <a href="index.html#intro" onclick="closeMob()">Scopri</a>
+  <a href="index.html#about" onclick="closeMob()">Diario</a>
   <a href="esperienze.html" onclick="closeMob()">Esperienze</a>
   <a href="escursioni.html" onclick="closeMob()">Escursioni</a>
-  <a href="index.html#footer" onclick="closeMob()">Contact</a>
+  <a href="index.html#footer" onclick="closeMob()">Contatti</a>
 </div>
 
 <!-- PAGE HEADER -->

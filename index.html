@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Orobie Heritage – Mountain & Nature Guide</title>
+<title>Orobie Heritage – Guida di Montagna e Natura</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -47,7 +47,7 @@ nav{
   color:var(--bark);
 }
 .nav-center a:hover{color:var(--rust)}
-.nav-lang{font-size:.85rem;letter-spacing:.12em;color:var(--earth);transition:color .3s}
+.nav-lang{font-size:.85rem;letter-spacing:.12em;color:var(--earth);transition:color .3s;text-decoration:none}
 .hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--bark);transition:background .3s}
 
@@ -283,29 +283,29 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
   <div style="width:64px"></div>
 
   <ul class="nav-center">
-    <li><a href="#intro">Explore</a></li>
-    <li><a href="#intro">Landscape</a></li>
-    <li><a href="#about">Journal</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="#intro">Scopri</a></li>
+    <li><a href="#intro">Paesaggio</a></li>
+    <li><a href="#about">Diario</a></li>
+    <li><a href="#about">Chi Sono</a></li>
     <li><a href="esperienze.html">Esperienze</a></li>
     <li><a href="escursioni.html">Escursioni</a></li>
-    <li><a href="#footer">Contact</a></li>
+    <li><a href="#footer">Contatti</a></li>
   </ul>
 
-  <span class="nav-lang">EN ▾</span>
+  <a href="en/index.html" class="nav-lang">EN</a>
   <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- MOBILE MENU -->
 <div class="mob-menu" id="mob">
   <button class="mob-close" id="mob-close">✕</button>
-  <a href="#intro"  onclick="closeMob()">Explore</a>
-  <a href="#intro"  onclick="closeMob()">Landscape</a>
-  <a href="#about"  onclick="closeMob()">Journal</a>
-  <a href="#about"  onclick="closeMob()">About</a>
+  <a href="#intro"  onclick="closeMob()">Scopri</a>
+  <a href="#intro"  onclick="closeMob()">Paesaggio</a>
+  <a href="#about"  onclick="closeMob()">Diario</a>
+  <a href="#about"  onclick="closeMob()">Chi Sono</a>
   <a href="esperienze.html" onclick="closeMob()">Esperienze</a>
   <a href="escursioni.html" onclick="closeMob()">Escursioni</a>
-  <a href="#footer" onclick="closeMob()">Contact</a>
+  <a href="#footer" onclick="closeMob()">Contatti</a>
 </div>
 
 <!-- HERO -->
@@ -325,10 +325,10 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
   </div>
 
   <div class="hero-content" id="heroContent">
-    <p class="hero-eyebrow">Guided Walks in the Italian Alps</p>
+    <p class="hero-eyebrow">Escursioni guidate sulle Alpi Orobie</p>
     <h1 class="hero-title">Orobie Heritage</h1>
     <div class="hero-divider"></div>
-    <p class="hero-tag"><em>Nature, stories and hidden places<br>of the Orobie mountains.</em></p>
+    <p class="hero-tag"><em>Natura, storie e luoghi nascosti<br>delle montagne orobiche.</em></p>
   </div>
 </div>
 
@@ -337,7 +337,7 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
 <div class="wrap">
   <div class="intro-inner">
     <div class="r">
-      <h2>I don't simply guide people through mountains. I help them understand the landscape they are walking in.</h2>
+      <h2>Non mi limito a guidare le persone in montagna. Le aiuto a capire il paesaggio che stanno attraversando.</h2>
       <div class="botanica">
         <svg width="130" height="44" viewBox="0 0 130 44" fill="none">
           <path d="M5 22 Q32 12 65 22 Q98 32 125 22" stroke="#C2B49A" stroke-width=".8" fill="none"/>
@@ -353,7 +353,7 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
           <ellipse cx="100" cy="10.5" rx="4" ry="2.2" fill="none" stroke="#8C7A62" stroke-width=".5" transform="rotate(15,100,10.5)"/>
         </svg>
       </div>
-      <a href="#explore" class="btn">Discover More</a>
+      <a href="#explore" class="btn">Scopri di più</a>
     </div>
     <div class="map-card r" style="transition-delay:.1s">
       <svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg">
@@ -402,10 +402,10 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
 <section class="explore" id="explore">
 <div class="wrap">
   <div class="explore-top">
-    <div class="eyebrow r">Explore the Orobie</div>
+    <div class="eyebrow r">Scopri le Orobie</div>
     <div class="explore-right r" style="transition-delay:.1s">
-      Every valley, every path, every stone<br>has a story to tell.
-      <br><a class="arr-link" href="esperienze.html">View Experiences</a>
+      Ogni valle, ogni sentiero, ogni pietra<br>ha una storia da raccontare.
+      <br><a class="arr-link" href="esperienze.html">Vedi le Esperienze</a>
     </div>
   </div>
   <div class="cards">
@@ -425,19 +425,19 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
       <div class="about-photo">← inserisci la tua foto qui</div>
     </div>
     <div class="r" style="transition-delay:.12s">
-      <p class="about-label">About Me</p>
+      <p class="about-label">Chi Sono</p>
       <div class="about-rule"></div>
-      <p class="about-p">I live in Clusone, at the foot of the Presolana.</p>
-      <p class="about-p">My curiosity for this landscape doesn't stop at the trail. I read the rocks like a geologist, the meadows like a botanist, the forest floor like a forager chasing mushrooms — and the odd streambed like someone hoping to find a fossil. <em>Every path holds more than one story.</em></p>
-      <p class="about-p">When I'm not outdoors, I'm usually playing the baghèt — the old bagpipe of the Bergamo valleys — baking sourdough bread, or teaching electronics to high school students. <em>All of it, somehow, comes back to these mountains.</em></p>
-      <a href="storia.html" class="arr-link">Read My Story</a>
+      <p class="about-p">Vivo a Clusone, ai piedi della Presolana.</p>
+      <p class="about-p">La mia curiosità per questo territorio non si ferma al sentiero. Leggo le rocce come un geologo, i prati come un botanico, il sottobosco come chi cerca funghi — e ogni tanto un torrente come chi spera di trovare un fossile. <em>Ogni sentiero racconta più di una storia.</em></p>
+      <p class="about-p">Quando non sono all'aperto, di solito suono il baghèt — l'antica cornamusa delle valli bergamasche — preparo pane con la pasta madre, oppure insegno elettronica alle superiori. <em>Alla fine, tutto torna sempre a queste montagne.</em></p>
+      <a href="storia.html" class="arr-link">Leggi la mia storia</a>
       <div class="seasons">
-        <p class="seasons-title">Seasonal Notes</p>
+        <p class="seasons-title">Note di Stagione</p>
         <div class="seasons-grid">
-          <div class="season"><div class="season-ico"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 3 Q16 9 13 15 Q10 9 13 3Z" fill="#7A8C74" opacity=".7"/><path d="M5 9 Q10 11 13 15 Q8 14 5 9Z" fill="#7A8C74" opacity=".5"/><path d="M21 9 Q16 11 13 15 Q18 14 21 9Z" fill="#7A8C74" opacity=".5"/><circle cx="13" cy="15" r="1.8" fill="#9C6040" opacity=".55"/></svg></div><div><p class="season-name">Spring</p><p class="season-desc">Waterfalls, wild flowers and the awakening of nature.</p></div></div>
-          <div class="season"><div class="season-ico"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="5" fill="none" stroke="#C2B49A" stroke-width=".8"/><g stroke="#C2B49A" stroke-width=".7" opacity=".55"><line x1="13" y1="2" x2="13" y2="5.5"/><line x1="13" y1="20.5" x2="13" y2="24"/><line x1="2" y1="13" x2="5.5" y2="13"/><line x1="20.5" y1="13" x2="24" y2="13"/><line x1="4.9" y1="4.9" x2="7.5" y2="7.5"/><line x1="18.5" y1="18.5" x2="21.1" y2="21.1"/><line x1="4.9" y1="21.1" x2="7.5" y2="18.5"/><line x1="18.5" y1="7.5" x2="21.1" y2="4.9"/></g></svg></div><div><p class="season-name">Summer</p><p class="season-desc">Alpine meadows, starry nights and fresh air.</p></div></div>
-          <div class="season"><div class="season-ico"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 4 Q17 9 15 14 L13 22 L11 14 Q9 9 13 4Z" fill="#9C6040" opacity=".55"/><path d="M7 8 Q12 10 13 14 Q9 12 7 8Z" fill="#C2B49A" opacity=".5"/><path d="M19 8 Q14 10 13 14 Q17 12 19 8Z" fill="#C2B49A" opacity=".5"/></svg></div><div><p class="season-name">Autumn</p><p class="season-desc">Golden larches, deer and the colors of the forest.</p></div></div>
-          <div class="season"><div class="season-ico"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M6 22 L13 5 L20 22Z" fill="none" stroke="#B0BCAA" stroke-width=".8"/><path d="M9 16 L17 16" stroke="#B0BCAA" stroke-width=".6"/><line x1="13" y1="5" x2="13" y2="2" stroke="#B0BCAA" stroke-width=".6"/><circle cx="13" cy="1.5" r=".9" fill="#B0BCAA" opacity=".5"/><g fill="#B0BCAA" opacity=".35"><circle cx="5" cy="12" r=".7"/><circle cx="9" cy="9" r=".7"/><circle cx="17" cy="9" r=".7"/><circle cx="21" cy="12" r=".7"/><circle cx="13" cy="24" r=".7"/><circle cx="8.5" cy="22" r=".7"/><circle cx="17.5" cy="22" r=".7"/></g></svg></div><div><p class="season-name">Winter</p><p class="season-desc">Silence, snow-covered landscapes and animal tracks.</p></div></div>
+          <div class="season"><div class="season-ico"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 3 Q16 9 13 15 Q10 9 13 3Z" fill="#7A8C74" opacity=".7"/><path d="M5 9 Q10 11 13 15 Q8 14 5 9Z" fill="#7A8C74" opacity=".5"/><path d="M21 9 Q16 11 13 15 Q18 14 21 9Z" fill="#7A8C74" opacity=".5"/><circle cx="13" cy="15" r="1.8" fill="#9C6040" opacity=".55"/></svg></div><div><p class="season-name">Primavera</p><p class="season-desc">Cascate, fiori selvatici e il risveglio della natura.</p></div></div>
+          <div class="season"><div class="season-ico"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="5" fill="none" stroke="#C2B49A" stroke-width=".8"/><g stroke="#C2B49A" stroke-width=".7" opacity=".55"><line x1="13" y1="2" x2="13" y2="5.5"/><line x1="13" y1="20.5" x2="13" y2="24"/><line x1="2" y1="13" x2="5.5" y2="13"/><line x1="20.5" y1="13" x2="24" y2="13"/><line x1="4.9" y1="4.9" x2="7.5" y2="7.5"/><line x1="18.5" y1="18.5" x2="21.1" y2="21.1"/><line x1="4.9" y1="21.1" x2="7.5" y2="18.5"/><line x1="18.5" y1="7.5" x2="21.1" y2="4.9"/></g></svg></div><div><p class="season-name">Estate</p><p class="season-desc">Prati alpini, notti stellate e aria fresca.</p></div></div>
+          <div class="season"><div class="season-ico"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 4 Q17 9 15 14 L13 22 L11 14 Q9 9 13 4Z" fill="#9C6040" opacity=".55"/><path d="M7 8 Q12 10 13 14 Q9 12 7 8Z" fill="#C2B49A" opacity=".5"/><path d="M19 8 Q14 10 13 14 Q17 12 19 8Z" fill="#C2B49A" opacity=".5"/></svg></div><div><p class="season-name">Autunno</p><p class="season-desc">Larici dorati, caprioli e i colori del bosco.</p></div></div>
+          <div class="season"><div class="season-ico"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M6 22 L13 5 L20 22Z" fill="none" stroke="#B0BCAA" stroke-width=".8"/><path d="M9 16 L17 16" stroke="#B0BCAA" stroke-width=".6"/><line x1="13" y1="5" x2="13" y2="2" stroke="#B0BCAA" stroke-width=".6"/><circle cx="13" cy="1.5" r=".9" fill="#B0BCAA" opacity=".5"/><g fill="#B0BCAA" opacity=".35"><circle cx="5" cy="12" r=".7"/><circle cx="9" cy="9" r=".7"/><circle cx="17" cy="9" r=".7"/><circle cx="21" cy="12" r=".7"/><circle cx="13" cy="24" r=".7"/><circle cx="8.5" cy="22" r=".7"/><circle cx="17.5" cy="22" r=".7"/></g></svg></div><div><p class="season-name">Inverno</p><p class="season-desc">Silenzio, paesaggi innevati e tracce di animali.</p></div></div>
         </div>
       </div>
     </div>
@@ -451,8 +451,8 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
     <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg></a>
     <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
   </div>
-  <p class="ft-center">Orobie Heritage – Mountain & Nature Guide</p>
-  <p class="ft-right">© 2024 All rights reserved</p>
+  <p class="ft-center">Orobie Heritage – Guida di Montagna e Natura</p>
+  <p class="ft-right">© 2026 Tutti i diritti riservati</p>
 </footer>
 
 <script>
