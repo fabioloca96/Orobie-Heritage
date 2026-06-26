@@ -24,12 +24,12 @@ img{display:block;max-width:100%}
 nav{
   position:sticky;top:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:.9rem 2.5rem;
+  padding:.3rem 2.5rem;
   background:rgba(240,235,225,.95);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--tan);
 }
 .nav-logo{text-decoration:none}
-.nav-logo img{height:56px;width:auto}
+.nav-logo img{height:76px;width:auto}
 .nav-center{display:flex;gap:2rem;list-style:none}
 .nav-center a{font-size:1.1rem;letter-spacing:.15em;text-transform:uppercase;color:var(--bark);text-decoration:none;transition:color .2s}
 .nav-center a:hover,.nav-center a.active{color:var(--rust)}
@@ -96,7 +96,8 @@ nav{
 .mob-close{position:absolute;top:1.4rem;right:2rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--bark)}
 
 @media(max-width:900px){
-  nav{padding:.8rem 1.4rem}
+  nav{padding:.3rem 1.4rem}
+  .nav-logo img{height:50px}
   .nav-center,.nav-lang{display:none}
   .hamburger{display:flex}
   .page-header{padding:2.5rem 1.4rem 1.5rem}
@@ -115,12 +116,12 @@ nav{
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <img src="../images/logo1.png" alt="Orobie Heritage">
+    <img src="../images/logo-nav.png" alt="Orobie Heritage">
   </a>
   <ul class="nav-center">
     <li><a href="index.html#intro">Explore</a></li>
     <li><a href="index.html#intro">Landscape</a></li>
-    <li><a href="index.html#about">Journal</a></li>
+    <li><a href="territory.html">Journal</a></li>
     <li><a href="index.html#about">About</a></li>
     <li><a href="experiences.html" class="active">Experiences</a></li>
     <li><a href="excursions.html">Excursions</a></li>
@@ -133,7 +134,7 @@ nav{
 <div class="mob-menu" id="mob">
   <button class="mob-close" id="mob-close">✕</button>
   <a href="index.html#intro" onclick="closeMob()">Explore</a>
-  <a href="index.html#about" onclick="closeMob()">Journal</a>
+  <a href="territory.html" onclick="closeMob()">Journal</a>
   <a href="experiences.html" onclick="closeMob()">Experiences</a>
   <a href="excursions.html" onclick="closeMob()">Excursions</a>
   <a href="index.html#footer" onclick="closeMob()">Contact</a>

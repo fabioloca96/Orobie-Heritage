@@ -192,6 +192,7 @@ section{padding:5.5rem 3rem}
   display:flex;align-items:center;justify-content:center;
 }
 .map-card svg{width:100%;max-width:420px}
+.map-card img{width:100%;max-width:420px;border-radius:6px;box-shadow:0 8px 28px rgba(74,58,40,.18)}
 
 .explore{background:var(--parchment)}
 .explore-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.8rem;flex-wrap:wrap;gap:1rem}
@@ -275,7 +276,7 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
   <ul class="nav-center">
     <li><a href="#intro">Explore</a></li>
     <li><a href="#intro">Landscape</a></li>
-    <li><a href="#about">Journal</a></li>
+    <li><a href="territory.html">Journal</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="experiences.html">Experiences</a></li>
     <li><a href="excursions.html">Excursions</a></li>
@@ -291,7 +292,7 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
   <button class="mob-close" id="mob-close">✕</button>
   <a href="#intro"  onclick="closeMob()">Explore</a>
   <a href="#intro"  onclick="closeMob()">Landscape</a>
-  <a href="#about"  onclick="closeMob()">Journal</a>
+  <a href="territory.html" onclick="closeMob()">Journal</a>
   <a href="#about"  onclick="closeMob()">About</a>
   <a href="experiences.html" onclick="closeMob()">Experiences</a>
   <a href="excursions.html" onclick="closeMob()">Excursions</a>
@@ -344,43 +345,7 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
       <a href="#explore" class="btn">Discover More</a>
     </div>
     <div class="map-card r" style="transition-delay:.1s">
-      <svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg">
-        <defs><style>.ml{font-family:'Cormorant Garamond',Georgia,serif;font-size:9.5px;fill:#4A3A28}.ms{font-family:'Cormorant Garamond',Georgia,serif;font-size:8px;fill:#8C7A62}</style></defs>
-        <path d="M0 220 L40 165 L80 195 L120 145 L165 110 L200 130 L235 95 L268 125 L295 100 L330 140 L365 108 L400 125 L420 118 L420 320 L0 320Z" fill="#E0D8CC" opacity=".7"/>
-        <path d="M0 250 L50 200 L95 230 L145 180 L190 200 L235 160 L270 185 L310 165 L350 185 L390 170 L420 180 L420 320 L0 320Z" fill="#C8B89A" opacity=".5"/>
-        <path d="M40 200 L70 148 L100 185 L140 140 L175 165 L210 115 L245 148 L278 120 L310 152 L348 128 L380 145 L420 135" stroke="#5A4A36" stroke-width=".75" fill="none" stroke-linejoin="round"/>
-        <path d="M0 240 L60 210 L110 230 L160 200 L200 215 L240 192 L280 208 L320 195 L360 210 L420 198" stroke="#8C7A62" stroke-width=".5" fill="none" opacity=".5"/>
-        <g fill="#7A8C74" opacity=".65">
-          <polygon points="55,215 60,200 65,215"/><polygon points="68,218 73,202 78,218"/>
-          <polygon points="82,222 87,205 92,222"/><polygon points="130,228 136,210 142,228"/>
-          <polygon points="145,232 151,213 157,232"/><polygon points="290,220 296,202 302,220"/>
-          <polygon points="308,224 314,206 320,224"/><polygon points="340,210 346,193 352,210"/>
-          <polygon points="356,214 362,196 368,214"/><polygon points="378,218 383,202 388,218"/>
-        </g>
-        <path d="M235 285 Q215 250 210 115" stroke="#C2B49A" stroke-width=".6" fill="none" stroke-dasharray="3,4"/>
-        <path d="M235 285 Q295 260 310 152" stroke="#C2B49A" stroke-width=".6" fill="none" stroke-dasharray="3,4"/>
-        <path d="M235 285 Q200 290 178 295" stroke="#C2B49A" stroke-width=".6" fill="none" stroke-dasharray="3,4"/>
-        <path d="M235 285 Q248 295 262 300" stroke="#C2B49A" stroke-width=".6" fill="none" stroke-dasharray="3,4"/>
-        <circle cx="210" cy="113" r="2.5" fill="#4A3A28"/>
-        <text class="ml" x="218" y="108">Pizzo della</text><text class="ml" x="218" y="120">Presolana</text>
-        <circle cx="140" cy="138" r="2.5" fill="#4A3A28"/>
-        <text class="ml" x="86" y="130">Pizzo Coca</text>
-        <circle cx="350" cy="128" r="2.5" fill="#4A3A28"/>
-        <text class="ml" x="358" y="124">Val di Scalve</text>
-        <circle cx="235" cy="285" r="2.5" fill="#4A3A28"/>
-        <text class="ml" x="243" y="282">Clusone</text>
-        <circle cx="175" cy="296" r="2" fill="#8C7A62"/>
-        <text class="ms" x="155" y="308">Valle Seriana</text>
-        <circle cx="262" cy="300" r="2" fill="#8C7A62"/>
-        <text class="ms" x="265" y="308">Val Camonica</text>
-        <g opacity=".35">
-          <path d="M370 285 Q378 268 386 258" stroke="#8C7A62" stroke-width=".8" fill="none"/>
-          <ellipse cx="388" cy="255" rx="9" ry="4.5" fill="none" stroke="#8C7A62" stroke-width=".65" transform="rotate(-50,388,255)"/>
-          <ellipse cx="380" cy="266" rx="7" ry="3.5" fill="none" stroke="#8C7A62" stroke-width=".55" transform="rotate(-8,380,266)"/>
-          <path d="M370 285 Q362 272 356 264" stroke="#8C7A62" stroke-width=".6" fill="none"/>
-          <ellipse cx="354" cy="261" rx="7" ry="3.5" fill="none" stroke="#8C7A62" stroke-width=".55" transform="rotate(20,354,261)"/>
-        </g>
-      </svg>
+      <img src="../images/mappa1.png" alt="Map of the Orobie Alps">
     </div>
   </div>
 </div>
@@ -415,9 +380,9 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
     <div class="r" style="transition-delay:.12s">
       <p class="about-label">About Me</p>
       <div class="about-rule"></div>
-      <p class="about-p">I live in Clusone, at the foot of the Presolana.</p>
-      <p class="about-p">My curiosity for this landscape doesn't stop at the trail. I read the rocks like a geologist, the meadows like a botanist, the forest floor like a forager chasing mushrooms — and the odd streambed like someone hoping to find a fossil. <em>Every path holds more than one story.</em></p>
-      <p class="about-p">When I'm not outdoors, I'm usually playing the baghèt — the old bagpipe of the Bergamo valleys — baking sourdough bread, or teaching electronics to high school students. <em>All of it, somehow, comes back to these mountains.</em></p>
+      <p class="about-p">I live in Clusone, at the foot of the queen of the Orobie: the Presolana.</p>
+      <p class="about-p">It all started with mushrooms. About ten years ago I began foraging seriously, joining the local mycological group — a network of enthusiasts and old-time experts who opened my eyes to these mountains. From there I never stopped looking around: rocks, plants, fossils, forgotten stories. Understanding what I see, putting a name to things and phenomena, makes me feel part of something bigger. <em>Every path holds more than one story.</em></p>
+      <p class="about-p">I'm a certified Mountain Guide (Accompagnatore di Media Montagna) — a legally recognised professional qualification, not just a hobby: it means specific training in orientation, weather reading, first aid and group management, which qualifies me to guide safely on trails and non-glacial terrain in every season. I also play the baghèt — the ancient Bergamo bagpipe — and my family raises alpacas, with whom I organise walks for families. By trade, I teach electronics in high school. <em>All of it, somehow, comes back to these mountains.</em></p>
       <a href="story.html" class="arr-link">Read My Story</a>
       <div class="seasons">
         <p class="seasons-title">Seasonal Notes</p>

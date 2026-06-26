@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Mia Storia – Orobie Heritage</title>
+<title>Il Territorio – Orobie Heritage</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -40,7 +40,7 @@ nav{
 /* ── PAGE HEADER ── */
 .page-header{
   padding:4rem 3rem 2.5rem;
-  max-width:780px;margin:0 auto;
+  max-width:1100px;margin:0 auto;
 }
 .page-eyebrow{
   display:flex;align-items:center;gap:.9rem;
@@ -56,33 +56,51 @@ nav{
 .page-sub{
   font-family:var(--serif);font-style:italic;
   font-size:1.1rem;color:var(--earth);
+  max-width:780px;
 }
 
-/* ── STORY SECTIONS ── */
-.story{max-width:780px;margin:0 auto;padding:0 3rem 2rem}
-.story-block{padding:2.6rem 0;border-top:1px solid var(--tan)}
-.story-block:first-child{border-top:none}
-.story-num{
+/* ── TERRITORIO BLOCKS ── */
+.terr{max-width:1100px;margin:0 auto;padding:0 3rem 2rem}
+.terr-block{
+  display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:center;
+  padding:3rem 0;border-top:1px solid var(--tan);
+}
+.terr-block:first-child{border-top:none}
+.terr-block .terr-photo{order:1}
+.terr-block .terr-copy{order:2}
+.terr-block.reverse .terr-photo{order:2}
+.terr-block.reverse .terr-copy{order:1}
+
+.terr-photo{aspect-ratio:4/3;overflow:hidden;background:var(--parchment);border:1px solid var(--tan)}
+.terr-photo img{width:100%;height:100%;object-fit:cover}
+.terr-photo.placeholder{
+  background:linear-gradient(160deg,#8A9E98 0%,#5C7468 50%,#3A5040 100%);
+  display:flex;align-items:flex-end;padding:1.2rem;
+  color:rgba(240,235,225,.5);font-size:.85rem;letter-spacing:.08em;
+  border:none;
+}
+
+.terr-num{
   font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rust);
   margin-bottom:.8rem;
 }
-.story-title{
+.terr-title{
   font-family:var(--serif);font-weight:300;
   font-size:1.7rem;color:var(--peak);margin-bottom:1rem;
 }
-.story-text{
+.terr-text{
   font-family:var(--serif);font-size:1.05rem;color:var(--earth);
   line-height:1.7;margin-bottom:.9rem;
 }
-.story-text:last-child{margin-bottom:0}
-.story-text em{font-style:italic;color:var(--bark)}
+.terr-text:last-child{margin-bottom:0}
+.terr-text em{font-style:italic;color:var(--bark)}
 
 /* ── CLOSING CTA ── */
 .story-cta{
   max-width:780px;margin:0 auto;padding:1rem 3rem 5rem;
   text-align:center;
 }
-.story-cta .story-text{margin-bottom:1.8rem}
+.story-cta .terr-text{margin-bottom:1.8rem}
 .cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 .btn{
   display:inline-block;padding:.65rem 1.7rem;
@@ -114,12 +132,15 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
   .nav-center,.nav-lang{display:none}
   .hamburger{display:flex}
   .page-header{padding:2.5rem 1.4rem 1.5rem}
-  .story{padding:0 1.4rem 1rem}
+  .terr{padding:0 1.4rem 1rem}
+  .terr-block,.terr-block.reverse{grid-template-columns:1fr;gap:1.4rem}
+  .terr-block .terr-photo,.terr-block.reverse .terr-photo{order:1}
+  .terr-block .terr-copy,.terr-block.reverse .terr-copy{order:2}
   .story-cta{padding:1rem 1.4rem 3.5rem}
 }
 @media(max-width:520px){
   .page-header{padding:2rem 1rem 1.2rem}
-  .story{padding:0 1rem .5rem}
+  .terr{padding:0 1rem .5rem}
   .story-cta{padding:1rem 1rem 3rem}
 }
 </style>
@@ -134,13 +155,13 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
   <ul class="nav-center">
     <li><a href="index.html#intro">Scopri</a></li>
     <li><a href="index.html#intro">Paesaggio</a></li>
-    <li><a href="territorio.html">Diario</a></li>
+    <li><a href="territorio.html" class="active">Diario</a></li>
     <li><a href="index.html#about">Chi Sono</a></li>
     <li><a href="esperienze.html">Esperienze</a></li>
     <li><a href="escursioni.html">Escursioni</a></li>
     <li><a href="index.html#footer">Contatti</a></li>
   </ul>
-  <a href="en/story.html" class="nav-lang">EN</a>
+  <a href="en/territory.html" class="nav-lang">EN</a>
   <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
 </nav>
 
@@ -148,6 +169,7 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
   <button class="mob-close" id="mob-close">✕</button>
   <a href="index.html#intro" onclick="closeMob()">Scopri</a>
   <a href="territorio.html" onclick="closeMob()">Diario</a>
+  <a href="index.html#about" onclick="closeMob()">Chi Sono</a>
   <a href="esperienze.html" onclick="closeMob()">Esperienze</a>
   <a href="escursioni.html" onclick="closeMob()">Escursioni</a>
   <a href="index.html#footer" onclick="closeMob()">Contatti</a>
@@ -155,59 +177,69 @@ footer{background:var(--cream);border-top:1px solid var(--tan);padding:1.5rem 3r
 
 <!-- PAGE HEADER -->
 <div class="page-header">
-  <div class="page-eyebrow">Chi Sono</div>
-  <h1 class="page-title">La Mia Storia</h1>
-  <p class="page-sub">Una guida fatta di curiosità, più che di un singolo sentiero.</p>
+  <div class="page-eyebrow">Diario</div>
+  <h1 class="page-title">Il Territorio</h1>
+  <p class="page-sub">Quello che si scopre solo se qualcuno te lo racconta.</p>
 </div>
 
-<!-- STORY -->
-<div class="story">
+<!-- TERRITORIO -->
+<div class="terr">
 
-  <div class="story-block">
-    <p class="story-num">01 — Radici</p>
-    <h2 class="story-title">Nato ai piedi della Presolana</h2>
-    <p class="story-text">Sono cresciuto a Clusone, in Val Seriana, con la Presolana visibile da quasi ogni finestra della mia infanzia. Queste montagne non sono mai state solo uno sfondo — sono il luogo dove è successo gran parte di ciò che mi ha formato.</p>
-    <p class="story-text">Guidare le persone tra queste montagne oggi mi sembra meno un lavoro e più la continuazione di una conversazione iniziata da bambino, la prima volta che ho raccolto un sasso, una foglia o un fungo e ho chiesto a qualcuno cosa fosse.</p>
+  <div class="terr-block">
+    <div class="terr-photo"><img src="images/vette.jpg" alt="Vette delle Alpi Orobie"></div>
+    <div class="terr-copy">
+      <p class="terr-num">01 — Habitat</p>
+      <h2 class="terr-title">Dal castagneto alla roccia nuda</h2>
+      <p class="terr-text">Le Orobie non sono una montagna sola, ma tante montagne sovrapposte. In poche ore di cammino si passa dai boschi di latifoglie e castagni della bassa valle, alle faggete e ai laricheti, fino ai pascoli alpini e alle pietraie sopra i duemila metri — ogni fascia con la sua aria, la sua luce, i suoi abitanti.</p>
+      <p class="terr-text">Camosci e stambecchi pascolano sui versanti più alti, le marmotte fischiano dalle pietraie, l'aquila reale disegna cerchi sopra le creste. Il Parco delle Orobie Bergamasche protegge gran parte di questo mosaico di ambienti: <em>più si sale, più cambia tutto.</em></p>
+    </div>
   </div>
 
-  <div class="story-block">
-    <p class="story-num">02 — La Qualifica</p>
-    <h2 class="story-title">Accompagnatore di Media Montagna: cosa significa davvero</h2>
-    <p class="story-text">Non sono una guida alpina, e non porto nessuno su pareti o ghiacciai. Sono Accompagnatore di Media Montagna (AMM), una qualifica professionale riconosciuta dalla legge italiana che si ottiene dopo una formazione specifica — orientamento, meteorologia, primo soccorso, gestione dei gruppi, conoscenza del territorio — e che abilita a guidare in sicurezza su sentieri e terreno non glaciale, in ogni stagione.</p>
-    <p class="story-text">In pratica: quando esci con me non stai semplicemente seguendo qualcuno che conosce la strada. C'è una preparazione precisa dietro ogni scelta di percorso, ogni valutazione del meteo, ogni decisione presa lungo il cammino. <em>La montagna va rispettata anche quando sembra facile.</em></p>
+  <div class="terr-block reverse">
+    <div class="terr-photo"><img src="images/botanica.jpg" alt="Primula albenensis"></div>
+    <div class="terr-copy">
+      <p class="terr-num">02 — Fioriture</p>
+      <h2 class="terr-title">Un fiore che esiste solo qui</h2>
+      <p class="terr-text">Tra le rocce calcaree del Monte Alben cresce la Primula albenensis, un fiore che la scienza ha descritto proprio da queste montagne e che, per quanto si sa, non si trova in nessun altro angolo del pianeta. È una di quelle scoperte che cambiano il modo di guardare un prato.</p>
+      <p class="terr-text">Ma è tutta la primavera-estate orobica a essere un calendario di fioriture: dalle genziane alle stelle alpine, dai rododendri ai gigli martagone. <em>Ogni mese ha i suoi fiori, e ogni fiore ha la sua storia.</em></p>
+    </div>
   </div>
 
-  <div class="story-block">
-    <p class="story-num">03 — Leggere il Paesaggio</p>
-    <h2 class="story-title">Geologia, botanica, micologia, fossili</h2>
-    <p class="story-text">Non sono mai riuscito a guardare una montagna come una semplice montagna. Un pendio di ghiaione è una lezione di geologia; un prato fiorito è un calendario delle stagioni; un angolo di sottobosco umido è, quasi sempre, una scusa per chinarsi e controllare quali funghi sono spuntati durante la notte. Colleziono fossili come altri collezionano souvenir — la prova che queste cime hanno una storia molto più lunga di quella che stiamo attraversando oggi.</p>
-    <p class="story-text">Non si tratta di competenza per il gusto della competenza. Si tratta di poter rispondere alla domanda che ogni buona escursione, prima o poi, fa nascere: <em>cosa sto guardando, esattamente?</em></p>
+  <div class="terr-block">
+    <div class="terr-photo placeholder">← inserisci la tua foto qui</div>
+    <div class="terr-copy">
+      <p class="terr-num">03 — Borghi</p>
+      <h2 class="terr-title">Paesi di pietra, storie da scoprire</h2>
+      <p class="terr-text">Gromo, con le sue antiche fucine e le armi che da secoli portano il suo nome, è riconosciuto tra i Borghi più Belli d'Italia. Clusone custodisce uno degli orologi planetari più antichi d'Europa, ancora funzionante sulla facciata del suo Palazzo Comunale. Castione della Presolana, Valbondione, Lizzola, Bratto: ogni paese ha una piazza, una chiesa, un soprannome dialettale che racconta qualcosa.</p>
+      <p class="terr-text"><em>Camminare tra le Orobie significa anche entrare in questi paesi, non solo attraversarli.</em></p>
+    </div>
   </div>
 
-  <div class="story-block">
-    <p class="story-num">04 — I Suoni delle Valli</p>
-    <h2 class="story-title">Il baghèt, la chitarra, la tromba</h2>
-    <p class="story-text">Le valli bergamasche hanno uno strumento tutto loro, il baghèt — una cornamusa che nel secolo scorso è quasi scomparsa e oggi viene tenuta in vita da un piccolo gruppo di musicisti. Io sono uno di loro. Suono anche la chitarra e la tromba, ma è il baghèt quello che lega direttamente a questa terra: nasce per essere suonato a feste, matrimoni e sagre, in paesi non troppo diversi da quelli che attraversiamo durante le escursioni.</p>
-    <p class="story-text">Per me il patrimonio non è solo baite di pietra e vecchi sentieri — è anche suono. <em>Chiedimelo, e magari lo porto con me.</em></p>
+  <div class="terr-block reverse">
+    <div class="terr-photo"><img src="images/boletus aestivalis.jpg" alt="Boletus aestivalis"></div>
+    <div class="terr-copy">
+      <p class="terr-num">04 — Tradizioni</p>
+      <h2 class="terr-title">Alpeggi, formaggio e funghi nel cesto</h2>
+      <p class="terr-text">In estate le mucche salgono ancora agli alpeggi, dove si produce il Formai de Mut, formaggio DOP nato proprio su questi pascoli. È un'economia di montagna antica, fatta di fatica e di stagioni, che si tocca con mano restando un po' con chi ci lavora ancora.</p>
+      <p class="terr-text">E poi i funghi: per molti qui è quasi una seconda vendemmia, un'uscita nel bosco che si ripete ogni autunno da generazioni, con regole non scritte su dove guardare e cosa lasciare crescere. <em>Anche questo è patrimonio, anche se non si mette in vetrina.</em></p>
+    </div>
   </div>
 
-  <div class="story-block">
-    <p class="story-num">05 — Pane, con Calma</p>
-    <h2 class="story-title">Quello che cresce, quello che si raccoglie, quello che fermenta</h2>
-    <p class="story-text">Faccio il pane in casa con una pasta madre che tengo viva da anni, e mi interessano moltissimo le tradizioni gastronomiche di queste valli — i formaggi, le conserve, i piatti costruiti su quello che offre la stagione. Micologia e cucina si intrecciano più di quanto si pensi: quasi tutto quello che raccolgo nel bosco, alla fine, finisce in un piatto.</p>
-  </div>
-
-  <div class="story-block">
-    <p class="story-num">06 — Un Lavoro, Più o Meno</p>
-    <h2 class="story-title">Insegno elettronica — e non ho mai davvero smesso di insegnare</h2>
-    <p class="story-text">Durante la settimana insegno elettronica alle superiori. È una montagna diversa da scalare, ma la capacità che serve è la stessa che porto in ogni escursione: prendere qualcosa che sembra complicato e farlo capire, senza perdere quello che lo rende interessante.</p>
+  <div class="terr-block">
+    <div class="terr-photo placeholder">← inserisci la tua foto qui</div>
+    <div class="terr-copy">
+      <p class="terr-num">05 — Eventi</p>
+      <h2 class="terr-title">Un calendario scandito dalle stagioni</h2>
+      <p class="terr-text">A Valbondione, in alcune giornate d'estate, le Cascate del Serio — tra le più alte d'Europa — vengono aperte e per qualche ora regalano uno spettacolo che normalmente la diga trattiene. In autunno, quando le mucche scendono dagli alpeggi, molti paesi festeggiano il desalpeggio con sagre, mercatini e prodotti di malga.</p>
+      <p class="terr-text">Sagre del fungo, feste patronali, mercatini di Natale nei borghi più piccoli: <em>vale sempre la pena chiedere cosa succede, prima di partire.</em></p>
+    </div>
   </div>
 
 </div>
 
 <!-- CLOSING CTA -->
 <div class="story-cta">
-  <p class="story-text">Di qualsiasi cosa finiamo per parlare lungo il sentiero — licheni, ghiacciai, funghi, o il modo giusto di accordare un baghèt — viene tutto dallo stesso posto: queste montagne, e la voglia di capirle un po' meglio ogni giorno.</p>
+  <p class="terr-text">Qualunque sia la stagione in cui vieni, c'è sempre qualcosa di particolare da scoprire lungo il sentiero. <em>Basta saper guardare — o avere qualcuno che te lo indica.</em></p>
   <div class="cta-row">
     <a href="escursioni.html" class="btn">Vedi le Escursioni</a>
     <a href="esperienze.html" class="btn">Vedi le Esperienze</a>
