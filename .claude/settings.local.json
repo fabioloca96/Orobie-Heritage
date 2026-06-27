@@ -15,7 +15,9 @@
       "Bash(python3 -c \"from PIL import Image; im=Image.open\\('images/logo1.png'\\); print\\(im.size\\)\")",
       "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless=new --disable-gpu --no-sandbox --virtual-time-budget=4000 --window-size=1300,1700 --screenshot=C:/Users/Fabio/AppData/Local/Temp/claude/d--scuola-FABIO-Orobie-Heritage-website-Orobie-Heritage/4b596082-4a66-4426-8453-e38504d769cf/scratchpad/escursioni_legend.png 'http://localhost:4444/escursioni.html#in-vetta')",
       "Bash(rm -f _site/_cardtest.html _site/_cardtest2.html)",
-      "Bash(pkill -f \"jekyll serve\")"
+      "Bash(pkill -f \"jekyll serve\")",
+      "Skill(run)",
+      "Skill(run:*)"
     ]
   }
 }
